@@ -1,0 +1,13 @@
+@import "global-style.scss";
+
+.button {
+    border: none;
+    outline: none;
+    background: $secondary-color;
+    color: $primary-color;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 5px;
+}
