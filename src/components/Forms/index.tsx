@@ -1,10 +1,14 @@
 import * as React from 'react'
 import { withFormik, FormikProps } from 'formik'
 
-interface Fields {
+interface Props {
+  onSubmit: (fields: Fields) => void;
+}
+
+export interface Fields {
   nomePessoa: string;
   cidade: string;
-  numeroDias: string;
+  numeroDias: number;
   dataViagem: string;
   sexoMFO: "m"|"f"|"o";
   banhos: number;
@@ -100,7 +104,7 @@ const InnerForm = ({
                     <div>
                       <p>Quantos dias de compromissos você vai ter lá?</p>
                       <input 
-                    name="compromissos"
+                    name="numeroCompromissos"
                     type="number"
                     onChange={handleChange}
                     value={values.numeroCompromissos}/> 
@@ -197,17 +201,7 @@ const InnerForm = ({
   );
 
   // Wrap our form with the using withFormik HoC
-const MyForm = withFormik({
-    // Transform outer props into form values
-    mapPropsToValues: props => ({ email: '',
-    password: '',
-    nomePessoa:'',
-    dataViagem: '',
-    cidade: '',
-    numeroDias:'',
-    }),
-    
-
+const MyForm = withFormik<Props, Fields>({
     // Submission handler
     handleSubmit: (
       values,
@@ -217,16 +211,16 @@ const MyForm = withFormik({
         setErrors /* setValues, setStatus, and other goodies */,
       }
     ) => {
-      console.log(values);
+      props.onSubmit(values);
     },
   })(InnerForm);
   
   // Use <MyForm /> anywhere
-  const Basic = () => (
+  const Basic = (props: Props) => (
     <div>
       <h1>Arrume Minha Mala</h1>
       <h2>Seu assistente pessoal para lhe ajudar a arrumar a suas roupas</h2>
-      <MyForm />
+      <MyForm onSubmit={props.onSubmit}/>
     </div>
   );
   

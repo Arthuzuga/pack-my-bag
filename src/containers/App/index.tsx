@@ -5,9 +5,7 @@ import { Route } from "react-router";
  * Containers
  */
 
-import Basic from "../../components/Forms";
-import TimerView from "../TimerView";
-import PrintNumber from "../PrintNumber"
+import Main from "../Main";
 
 /** 
  * Style
@@ -21,7 +19,7 @@ export default class App extends React.Component<{}, {}> {
             <div className="container">
                 {/* <Route exact path="/" component={TimerView} />
                 <Route path="/numero/:number" component={PrintNumber} /> */}
-                <Route exact path="/" component={Basic}/>
+                <Route exact path="/" component={Main}/>
             </div>
         );
     }

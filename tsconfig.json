@@ -6,6 +6,7 @@
         "module": "commonjs",
         "target": "es6",
         "jsx": "react",
+        "strict": true,
         "experimentalDecorators": true
     },
     "include": [
