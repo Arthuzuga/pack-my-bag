@@ -30,30 +30,38 @@ const InnerForm = ({
     isSubmitting,
   }: FormikProps<Fields>) => (
     <form onSubmit={handleSubmit}>
-      <p>Qual o seu nome?</p>
+        <label>
+        <p>Qual o seu nome?</p>
                 <input 
                     name="nomePessoa"
                     value= {values.nomePessoa}
                     onChange={handleChange}
                     placeholder="Qual o seu nome?"
                 />
+        </label>
 
-      <p>Qual o seu sexo</p>
-                <input 
+     <label htmlFor={"sexoMFO"}><p>Qual o seu sexo</p></label>
+            <input 
                 type="radio"
                 name="sexoMFO"
+                required
                 onChange={handleChange}
-                value="m"/> Masculino
-               <input 
+                value="m"
+            /> Masculino
+            <input 
                 type="radio"
+                required
                 name="sexoMFO"
                 onChange={handleChange}
-                value="f"/> Feminino
-               <input 
+                value="f"
+            /> Feminino
+            <input 
                 type="radio"
                 name="sexoMFO"
+                required
                 onChange={handleChange}
-                value="o"/> Outro
+                value="o"
+            /> Outro
 
       <p>Para onde vamos?</p>
                 <input 
