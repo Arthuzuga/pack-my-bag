@@ -1,0 +1,51 @@
+@import "global-style.scss";
+
+h1,h2{
+    text-align: center;   
+}
+
+.form{
+    background-color: $secondary-color;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+input[type=text]{
+    width: 50%;
+    margin: 8px 0;
+    padding: 12px 15px;
+    font-size: 13px;
+}
+
+input[type=number]{
+    width: 50%;
+    margin: 8px 0;
+    padding: 12px 15px;
+    font-size: 13px;
+}
+
+input[type=date]{
+    width: 50%;
+    margin: 8px 0;
+    padding: 12px 15px;
+    font-size: 13px;
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+button{
+    width: 25%;
+    padding: 5px;
+    background-color: $primary-color;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+    display: inline-block;
+    color: #FFFFFF;
+}

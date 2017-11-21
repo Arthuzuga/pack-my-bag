@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom';
 import { Fields } from "../Forms";
 
+const s = require("./style.scss");
 
 interface Props {
     fields: Fields;
@@ -9,7 +10,7 @@ interface Props {
 }
 
 type Gender = "male" | "female" | "other";
-type Stuff = "shirt" | "pants" | "underwear" | "socks" | "pijamas" | "socialshirt" | "socialpants" | "dress";
+type Stuff = "shirt" | "pants" | "underwear" | "socks" | "pijamas" | "socialshirt" | "socialpants" | "dress"|"sunga"|"biquini";
 type Amounts = { [key in Stuff]: null | number };
 type Weights = { [key in Stuff]: number };
 type Names = { [key in Stuff]: string };
@@ -24,9 +25,11 @@ function getAmounts(fields: Fields): Amounts {
         underwear: ((fields.banhos * fields.numeroDias)+1),
         socks: fields.numeroDias >= 7 ? (Math.round(fields.numeroDias / 7) + 1):1,
         pijamas: fields.numeroDias >= 7 ? (Math.round(fields.numeroDias / 7) + 1) : 1,
-        socialshirt: fields.numeroCompromissos,
-        socialpants: fields.numeroCompromissos >= 2 ? (fields.numeroCompromissos -1) : 1,
-        dress: fields.sexoMFO === "m" ? null : fields.numeroCompromissos
+        socialshirt: fields.sexoMFO === "m" && fields.compromissos ==="sim" ? fields.numeroCompromissos : null,
+        socialpants: fields.sexoMFO === "m" && fields.compromissos ==="sim" ? (fields.numeroCompromissos >= 2 ? (fields.numeroCompromissos -1) : 1) : null,
+        dress: fields.sexoMFO === "f" && fields.compromissos ==="sim"  ?  fields.numeroCompromissos : null,
+        sunga: fields.sexoMFO === "m" && fields.praias ==="sim" ? 1:null,
+        biquini: fields.sexoMFO === "f" && fields.praias ==="sim" ? 1:null
     };
 }
 
@@ -40,6 +43,8 @@ const clothWeights: Weights = {
     socialshirt: 250,
     socialpants: 600,
     dress: 400,
+    sunga: 50,
+    biquini: 100
  }
 
  //Metodo Criado por Victor Magalhães
@@ -51,7 +56,9 @@ const clothWeights: Weights = {
      pijamas: "Pijamas",
      socialshirt: "Camisas Social",
      socialpants: "Calças Social",
-     dress: "Vestidos"
+     dress: "Vestidos",
+     sunga: "Sunga",
+     biquini:"Biquini"
  }
 
  //Metodo Criado por Victor Magalhães
@@ -85,7 +92,7 @@ const clothWeights: Weights = {
                         }
 
                         <tr>
-                            <td colSpan={2}><b>Peso total</b></td>
+                            <td colSpan={2} className={s.total}><b>Peso total</b></td>
                             <td>{
                                 (Object.keys(amounts).filter(cloth => cloth !== null) as Stuff[])
                                     .reduce((acc, el) => acc + amounts[el]! * clothWeights[el], 0) / 1000

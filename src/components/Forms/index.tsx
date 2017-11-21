@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { withFormik, FormikProps } from 'formik'
 
+const s = require("./style.scss");
+
 interface Props {
   onSubmit: (fields: Fields) => void;
 }
@@ -29,10 +31,11 @@ const InnerForm = ({
     handleSubmit,
     isSubmitting,
   }: FormikProps<Fields>) => (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={s.form}>
         <label>
         <p>Qual o seu nome?</p>
                 <input 
+                    type="text"
                     name="nomePessoa"
                     value= {values.nomePessoa}
                     onChange={handleChange}
@@ -65,6 +68,7 @@ const InnerForm = ({
 
       <p>Para onde vamos?</p>
                 <input 
+                    type="text"
                     name="cidade"
                     value= {values.cidade}
                     onChange={handleChange}
