@@ -1,21 +1,26 @@
 @import "global-style.scss";
 
 table {
-    width: 95%;
-    background-color: $secondary-color;
+    background-color: rgba($color: #E0F2F1, $alpha: 0.8);
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
     font-family: 'Roboto', sans-serif;
     font-size: 13px;
-    margin-left: 20px;
-    margin-right: 20px;
     border-collapse: collapse;
     border-spacing: 0;
+    display: inline-block;
+    width: 45%;
+    box-sizing: border-box;
 }
 
 th,td{
     text-align: left;
     padding: 8px;
+}
+
+caption{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
 }
 
 .total{

@@ -1,0 +1,16 @@
+
+.divTitle{
+     text-align: center;   
+}
+
+.main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.title{
+    width: 100%;
+}
