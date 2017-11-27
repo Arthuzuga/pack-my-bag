@@ -1,16 +1,24 @@
 
-.divTitle{
-     text-align: center;   
-}
 
-.main{
+
+@media screen and (min-width: 768px){
+    .divTitle{
+        text-align: center;
+   }
+
+   .main{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-flow: row wrap;
+    justify-content: space-around;
     align-items: flex-start;
+    }
+
+    .title{
+        width: 100%;
+        text-align: center;
+    }
 }
 
-.title{
-    width: 100%;
-}
+
+
+

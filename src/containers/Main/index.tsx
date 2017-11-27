@@ -41,18 +41,15 @@ export default class Main extends React.Component<Props, State> {
                     <h1>Arrume Minha Mala</h1> 
                     <h2>Seu assistente pessoal para lhe ajudar a arrumar a suas roupas</h2>
                 </div>   
-               
                     <Basic
                         fields={this.state.fields}
                         onSubmit={this.onSubmit}
                         />
-
                     {
                         this.state.fields ? (
                             <Table fields={this.state.fields}/>
                         ) : null
-                    }
-                
+                    }        
             </div>
         );
     }

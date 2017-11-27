@@ -6,12 +6,11 @@ const s = require("./style.scss");
 
 interface Props {
     fields: Fields;
-   // peso: number;
 }
 
 type Gender = "male" | "female" | "other";
 type Stuff = "shirt" | "pants" | "underwear" | "socks" | "pijamas" | "socialshirt" | "socialpants" | "dress"|"sunga"|"biquini";
-type Amounts = { [key in Stuff]: null | number };
+type Amounts = { [key in Stuff]: null | number }; //irá criar um objeto com os mesmos contrutores do Stuff, mas con sua tipagem de null ou number
 type Weights = { [key in Stuff]: number };
 type Names = { [key in Stuff]: string };
 type IsGenderSpecific = { [key in Stuff]: null | Gender };
@@ -28,12 +27,12 @@ function getAmounts(fields: Fields): Amounts {
         socialshirt: fields.sexoMFO === "m" && fields.compromissos ==="sim" ? fields.numeroCompromissos : null,
         socialpants: fields.sexoMFO === "m" && fields.compromissos ==="sim" ? (fields.numeroCompromissos >= 2 ? (fields.numeroCompromissos -1) : 1) : null,
         dress: fields.sexoMFO === "f" && fields.compromissos ==="sim"  ?  fields.numeroCompromissos : null,
-        sunga: fields.sexoMFO === "m" && fields.praias ==="sim" ? 1:null,
-        biquini: fields.sexoMFO === "f" && fields.praias ==="sim" ? 1:null
+        sunga: fields.sexoMFO === "m" && fields.praias ==="sim" && fields.cidadePraia=="sim" ? 1:null,
+        biquini: fields.sexoMFO === "f" && fields.praias ==="sim"  && fields.cidadePraia=="sim" ? 1:null
     };
 }
 
-//Metodo Criado por Victor Magalhães
+//Objeto Criado por Victor Magalhães
 const clothWeights: Weights = {
     shirt: 250,
     pants: 800,
@@ -47,11 +46,11 @@ const clothWeights: Weights = {
     biquini: 100
  }
 
- //Metodo Criado por Victor Magalhães
+ //Objeto Criado por Victor Magalhães
  const clothNames: Names ={
      shirt: "Camisas",
      pants: "Calças",
-     underwear: "Roupas Intima",
+     underwear: "Roupas Intimas",
      socks: "Meias",
      pijamas: "Pijamas",
      socialshirt: "Camisas Social",
@@ -77,7 +76,7 @@ const clothWeights: Weights = {
                     <tbody>
                         {
                             (Object.keys(amounts) as Stuff[])
-                                .filter(cloth => amounts[cloth] !== null)
+                                .filter(cloth => amounts[cloth] !== null) //filtrar somente aquele que apresentem valore diferentes de null
                                 .map(
                                     (cloth) => (
                                         <tr key={cloth}>
