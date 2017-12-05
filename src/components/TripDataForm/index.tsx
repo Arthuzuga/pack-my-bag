@@ -1,13 +1,15 @@
 import * as React from "react";
-import { withFormik, FormikProps } from "formik";
-import Geosuggest, {Suggest, Styles} from "react-geosuggest";
+import { withFormik, FormikProps, Field } from "formik";
+import Geosuggest, { Suggest, Styles } from "react-geosuggest";
 import { ITripData } from "../../stores/LuggageStore";
+
 
 const s = require("./style.scss");
 
 interface Props {
     fields?: Fields;
     onSubmit: (fields: Fields) => void;
+    handleGeosuggestChange: (fields: Fields)=> void;
 }
 
 type Fields = ITripData;
@@ -18,7 +20,7 @@ export const InnerForm = ({
     touched,
     handleChange,
     handleSubmit,
-    isSubmitting
+    isSubmitting,
 }: FormikProps<Fields>) => (
     <form onSubmit={handleSubmit} className={s.form}>
         <label>
@@ -74,6 +76,7 @@ export const InnerForm = ({
             placeholder="Para Onde Vamos"
             className={s.input}
         />
+
         <p className={s.p}>Quantos dia pretende passar lá?</p>
         <input
             name="numeroDias"
@@ -249,9 +252,8 @@ const MyForm = withFormik<Props, Fields>({
     ) => {
         props.onSubmit(values);
     },
-
     mapPropsToValues: props => props.fields!,
-    enableReinitialize: true
+    enableReinitialize: true,
 })(InnerForm);
 
 // Use <MyForm /> anywhere

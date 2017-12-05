@@ -33,7 +33,6 @@ export type Weights = { [key in Stuff]: number };
 export type Names = { [key in Stuff]: string };
 export type IsGenderSpecific = { [key in Stuff]: null | Gender };
 
-//Objeto Criado por Victor Magalhães
 export const clothWeights: Weights = {
     shirt: 250,
     pants: 800,
@@ -47,7 +46,6 @@ export const clothWeights: Weights = {
     biquini: 100
 };
 
-//Objeto Criado por Victor Magalhães
 export const clothNames: Names = {
     shirt: "Camisas",
     pants: "Calças",
@@ -69,7 +67,7 @@ export class LuggageStore {
 
     constructor() {
         const fieldsAsString = localStorage.getItem(FieldsLocalStorageID);
-
+        
         let tripData: ITripData | null = null;
 
         if (fieldsAsString) {

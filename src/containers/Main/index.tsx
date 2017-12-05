@@ -10,6 +10,7 @@ import { observer, inject } from "mobx-react";
 
 import Basic from "../../components/TripDataForm";
 import Table from "../../components/ClothesDemandTable";
+import InfoTable from "../../components/TripInformationTable";
 import { ITripData, LuggageStore } from "../../stores/LuggageStore";
 
 /** 
@@ -27,11 +28,18 @@ interface State {}
 @inject("luggageStore") // este nome tem que ser igual ao nome passado para o Provider no rootStories
 @observer
 export default class Main extends React.Component<Props, State> {
-    state: State = {};
+    state: State = {
+        'address.fullAddress': "",
+    };
 
     onSubmit = (fields: ITripData) => {
         this.props.luggageStore.tripData = fields;
     }
+
+    handleGeosuggestChange = (fields: ITripData) => {
+        this.setState({ 'address.fullAddress': fields.cidade});
+      }
+    
     
     render() {
         return (
@@ -43,6 +51,7 @@ export default class Main extends React.Component<Props, State> {
                     <Basic
                         fields={this.props.luggageStore.tripData || undefined}
                         onSubmit={this.onSubmit}
+                        handleGeosuggestChange={this.handleGeosuggestChange}
                     />
 
                     {
@@ -53,7 +62,15 @@ export default class Main extends React.Component<Props, State> {
                             />
                         ) : null
                     }     
-               
+
+                    {
+                        this.props.luggageStore.clothesDemand ? (
+                            <InfoTable
+                                tripData={this.props.luggageStore.tripData!}
+                                clothesDemand={this.props.luggageStore.clothesDemand}
+                            />
+                        ) : null
+                    }   
             </div>
         );
     }

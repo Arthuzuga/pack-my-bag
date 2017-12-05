@@ -21,17 +21,30 @@ const rootStores = {
 const browserHistory = createBrowserHistory();
 const history = syncHistoryWithStore(browserHistory, routingStore);
 
-// const base = "BRL";
+const base = "BRL";
 
-// async function getCurrency() {
-//     try {
-//         const data = await fetch(`http://api.fixer.io/latest?base=${base}`).then(res => res.json());
-//         console.log(data);
-//     } catch (err) {
-//     }
-// }
+async function getCurrency() {
+    try {
+        const data = await fetch(`http://api.fixer.io/latest?base=${base}`).then(res => res.json());
+        console.log(data);
+    } catch (err) {
+    }
+}
 
-// getCurrency()
+getCurrency()
+
+const latlng = "-13.977547,-40.455398";
+
+async function getWeather() {
+    try{
+        const data1 = await fetch(`https://api.darksky.net/forecast/aef5aec83ef0cf6e8d34f24291d62db5/${latlng}`,{mode: 'no-cors'})
+        .then(res => res.json());
+        console.log(data1);
+    }catch(err){
+        console.log(err);
+    }   
+}
+getWeather()
 
 ReactDOM.render(
     <Provider {...rootStores} >
