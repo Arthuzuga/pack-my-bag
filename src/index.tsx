@@ -7,19 +7,31 @@ import { Provider } from "mobx-react";
 import { RouterStore, syncHistoryWithStore } from "mobx-react-router";
 import createBrowserHistory from 'history/createBrowserHistory';
 
-import { TimerStore } from "./stores";
+import { LuggageStore } from "./stores";
 
 import App from "./containers/App";
 
 const routingStore = new RouterStore();
-const timerStore = new TimerStore();
+const luggageStore = new LuggageStore();
 const rootStores = {
-    timerStore: timerStore,
+    luggageStore: luggageStore, // este nome tem que ser igual ao nome passado para o inject
     routing: routingStore
 };
 
 const browserHistory = createBrowserHistory();
 const history = syncHistoryWithStore(browserHistory, routingStore);
+
+// const base = "BRL";
+
+// async function getCurrency() {
+//     try {
+//         const data = await fetch(`http://api.fixer.io/latest?base=${base}`).then(res => res.json());
+//         console.log(data);
+//     } catch (err) {
+//     }
+// }
+
+// getCurrency()
 
 ReactDOM.render(
     <Provider {...rootStores} >

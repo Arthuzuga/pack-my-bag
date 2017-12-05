@@ -1,1 +1,1 @@
-export { TimerStore } from './TimerStore';
+export { LuggageStore } from './LuggageStore';

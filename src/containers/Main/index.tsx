@@ -1,12 +1,16 @@
 import * as React from "react";
 import { Route } from "react-router";
+import { observer, inject } from "mobx-react";
+
+
 
 /**
  * Containers
  */
 
-import Basic, { Fields } from "../../components/Forms";
-import Table from "../../components/Table";
+import Basic from "../../components/TripDataForm";
+import Table from "../../components/ClothesDemandTable";
+import { ITripData, LuggageStore } from "../../stores/LuggageStore";
 
 /** 
  * Style
@@ -14,24 +18,19 @@ import Table from "../../components/Table";
 
 const s = require("./style.scss");
 
-interface Props {}
-interface State {
-    fields?: Fields;
+interface Props {
+    luggageStore: LuggageStore;
 }
 
+interface State {}
+
+@inject("luggageStore") // este nome tem que ser igual ao nome passado para o Provider no rootStories
+@observer
 export default class Main extends React.Component<Props, State> {
     state: State = {};
 
-    componentDidMount() {
-        const fields = localStorage.getItem("fields");
-        if (fields) {
-            this.setState({ fields: JSON.parse(fields) });
-        }
-    }
-    
-    onSubmit = (fields: Fields) => {
-        localStorage.setItem("fields", JSON.stringify(fields));
-        this.setState({ fields });
+    onSubmit = (fields: ITripData) => {
+        this.props.luggageStore.tripData = fields;
     }
     
     render() {
@@ -42,14 +41,19 @@ export default class Main extends React.Component<Props, State> {
                     <h2>Seu assistente pessoal para lhe ajudar a arrumar a suas roupas</h2>
                 </div>   
                     <Basic
-                        fields={this.state.fields}
+                        fields={this.props.luggageStore.tripData || undefined}
                         onSubmit={this.onSubmit}
-                        />
+                    />
+
                     {
-                        this.state.fields ? (
-                            <Table fields={this.state.fields}/>
+                        this.props.luggageStore.clothesDemand ? (
+                            <Table
+                                tripData={this.props.luggageStore.tripData!}
+                                clothesDemand={this.props.luggageStore.clothesDemand}
+                            />
                         ) : null
-                    }        
+                    }     
+               
             </div>
         );
     }

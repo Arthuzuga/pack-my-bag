@@ -22,6 +22,10 @@ module.exports = {
                 test: /\.tsx?$/,
                 loader: "babel-loader?presets[]=es2015,plugins[]=transform-runtime!awesome-typescript-loader"
             },
+            // {
+            //     test: /\.jsx?$/,
+            //     loader: "babel-loader?presets[]=es2015,plugins[]=transform-runtime"
+            // },
             {
                 test: /\.css/,
                 loader: combineLoaders([
