@@ -2,6 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ITripData, Stuff, Amounts, clothNames, clothWeights } from "../../stores/LuggageStore";
 
+
+
 type Fields = ITripData;
 
 const s = require("./style.scss");
@@ -17,37 +19,37 @@ const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand })
             <caption>Informações para sua viagem </caption>
             <thead>
                 <tr>
-                    <th>Itens</th>
-                    <th>Quantidade</th>
-                    <th>Peso</th>
+                    <th>Tipo de Mala</th>
+                    <th>Local</th>
+                    <th>Taxa</th>
                 </tr>
             </thead>
             <tbody>
-                {(Object.keys(clothesDemand) as Stuff[])
-                    .filter(cloth => clothesDemand[cloth] !== null) //filtrar somente aquele que apresentem valore diferentes de null
-                    .map(cloth => (
-                        <tr key={cloth}>
-                            <td>{clothNames[cloth]}</td>
-                            <td>{clothesDemand[cloth]}</td>
-                            <td>
-                                {clothesDemand[cloth]! * clothWeights[cloth] / 1000}kg
-                            </td>
-                        </tr>
-                    ))}
 
-                <tr>
-                    <td colSpan={2} className={s.total}>
-                        <b>Peso total</b>
-                    </td>
-                    <td>
-                        {(Object.keys(clothesDemand).filter(
-                            cloth => cloth !== null
-                        ) as Stuff[]).reduce(
-                            (acc, el) => acc + clothesDemand[el]! * clothWeights[el],
-                            0
-                        ) / 1000}kg
-                    </td>
-                </tr>
+                {
+                     ((Object.keys(clothesDemand).filter(
+                        cloth => cloth !== null
+                    ) as Stuff[]).reduce(
+                        (acc, el) => acc + clothesDemand[el]! * clothWeights[el],
+                        0
+                    ) / 1000) <=5 ?(
+                        <tr>
+                            <td>
+                                <img src={require('../../images/mochila.png')} />
+                            </td>
+                            <td>Sua mala poderá ser levada no bagageiro</td>
+                            <td>Você não terá custos adicionais</td>
+                        </tr>
+                    ):(
+                        <tr>
+                            <td>
+                            <img src={require('../../images/maleta.png')}/>
+                            </td>
+                            <td>Sua mala deverá ser despachada</td>
+                            <td>Custo adicional de: </td>
+                        </tr>
+                    )
+                }
             </tbody>
         </table>
     );

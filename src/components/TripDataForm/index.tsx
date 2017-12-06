@@ -1,15 +1,13 @@
 import * as React from "react";
 import { withFormik, FormikProps, Field } from "formik";
-import Geosuggest, { Suggest, Styles } from "react-geosuggest";
+import Geosuggest, { Suggest, Styles, GeosuggestProps } from "react-geosuggest";
 import { ITripData } from "../../stores/LuggageStore";
-
 
 const s = require("./style.scss");
 
 interface Props {
     fields?: Fields;
     onSubmit: (fields: Fields) => void;
-    handleGeosuggestChange: (fields: Fields)=> void;
 }
 
 type Fields = ITripData;
@@ -75,6 +73,16 @@ export const InnerForm = ({
             onChange={handleChange}
             placeholder="Para Onde Vamos"
             className={s.input}
+        />
+
+        <Geosuggest 
+            onChange={(...args: any[]) => {
+                console.log({args});
+            }}
+            onSuggestSelect={(...args: any[]) => {
+                console.log({args});
+            }}
+            value={values.cidade}
         />
 
         <p className={s.p}>Quantos dia pretende passar lá?</p>
@@ -173,7 +181,7 @@ export const InnerForm = ({
         ) : (
             <span />
         )}
-        <p>Em {values.cidade} tem praia?</p>
+        <p className={s.p} >Em {values.cidade} tem praia?</p>
         <input
             name="cidadePraia"
             value="sim"

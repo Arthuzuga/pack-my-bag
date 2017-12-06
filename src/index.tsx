@@ -33,14 +33,17 @@ async function getCurrency() {
 
 getCurrency()
 
-const latlng = "-13.977547,-40.455398";
+const city = "Sao+Paulo";
+const lat = "-23.5505199";
+const lng = "-46.63330939999997";
+const countryCode= "BR";
 
 async function getWeather() {
-    try{
-        const data1 = await fetch(`https://api.darksky.net/forecast/aef5aec83ef0cf6e8d34f24291d62db5/${latlng}`,{mode: 'no-cors'})
-        .then(res => res.json());
+    try {
+        const data1 = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=metric&appid=2d500cb874e4b6c07216d58d9201c979&cnt=16`)
+            .then(res => res.json());
         console.log(data1);
-    }catch(err){
+    } catch(err) {
         console.log(err);
     }   
 }

@@ -28,17 +28,15 @@ interface State {}
 @inject("luggageStore") // este nome tem que ser igual ao nome passado para o Provider no rootStories
 @observer
 export default class Main extends React.Component<Props, State> {
-    state: State = {
-        'address.fullAddress': "",
-    };
+    state: State = {};
 
     onSubmit = (fields: ITripData) => {
         this.props.luggageStore.tripData = fields;
     }
 
-    handleGeosuggestChange = (fields: ITripData) => {
-        this.setState({ 'address.fullAddress': fields.cidade});
-      }
+    // handleGeosuggestChange = (fields: ITripData) => {
+    //     this.setState({ 'address.fullAddress': fields.cidade});
+    //   }
     
     
     render() {
@@ -51,7 +49,7 @@ export default class Main extends React.Component<Props, State> {
                     <Basic
                         fields={this.props.luggageStore.tripData || undefined}
                         onSubmit={this.onSubmit}
-                        handleGeosuggestChange={this.handleGeosuggestChange}
+                        // handleGeosuggestChange={this.handleGeosuggestChange}
                     />
 
                     {
