@@ -2,12 +2,16 @@ import * as React from "react";
 import { withFormik, FormikProps, Field } from "formik";
 import Geosuggest, { Suggest, Styles, GeosuggestProps } from "react-geosuggest";
 import { ITripData } from "../../stores/LuggageStore";
+import { WeatherStore, Clima, Names, Weathers , ClimaType} from "../../stores/WeatherStore";
+import { CurrentStore } from "../../stores/CurrentStore";
 
 const s = require("./style.scss");
 
 interface Props {
     fields?: Fields;
     onSubmit: (fields: Fields) => void;
+    weatherSearcher: (fields: Fields)=> void;
+    currentSearcher: (fields: Fields)=> void;
 }
 
 type Fields = ITripData;
@@ -19,7 +23,8 @@ export const InnerForm = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-}: FormikProps<Fields>) => (
+    weatherSearcher,
+}: FormikProps<Fields> & Pick<Props, "weatherSearcher">) => (
     <form onSubmit={handleSubmit} className={s.form}>
         <label>
             <p className={s.p}>Qual o seu nome?</p>
@@ -66,24 +71,38 @@ export const InnerForm = ({
         />{" "}
         Outro
         <p className={s.p}>Para onde vamos?</p>
-        <input
+        {/* <input
             type="text"
             name="cidade"
             value={values.cidade}
             onChange={handleChange}
             placeholder="Para Onde Vamos"
             className={s.input}
-        />
+        /> */}
 
         <Geosuggest 
+            className={s.geosuggestSytle}
+            
             onChange={(...args: any[]) => {
                 console.log({args});
             }}
-            onSuggestSelect={(...args: any[]) => {
-                console.log({args});
+            onSuggestSelect={(value) => {
+                values.location = value.location;
+                values.cidade = value.label.toString();
+                console.log(value);
+                weatherSearcher(values);
             }}
-            value={values.cidade}
         />
+
+        <p className={s.p}>Qual a moeda que você usa?</p>
+        <select value={values.base} name="base" onChange={handleChange}>
+            <option>Selecione uma moeda</option>
+            <option value="BRL" selected={values.base === "BRL"}>Reais</option>
+            <option value="USD" selected={values.base === "USD"}>Dólar Americano</option>
+            <option value="EUR" selected={values.base === "EUR"}>Euro</option>
+            <option value="GBP" selected={values.base === "GBP"}>Libras Esterlinas</option>
+            <option value="JPY" selected={values.base === "JPY"}>YEN</option>
+        </select>    
 
         <p className={s.p}>Quantos dia pretende passar lá?</p>
         <input
@@ -200,7 +219,7 @@ export const InnerForm = ({
             className={s.input}
         />{" "}
         Não
-        {values.cidadePraia === "sim" ? (
+        {values.cidadePraia === "sim"? (
             <div>
                 <p className={s.p}>Vamos a La Playa?</p>
                 <input
@@ -259,6 +278,8 @@ const MyForm = withFormik<Props, Fields>({
         }
     ) => {
         props.onSubmit(values);
+        props.weatherSearcher(values);
+        props.currentSearcher(values);
     },
     mapPropsToValues: props => props.fields!,
     enableReinitialize: true,
