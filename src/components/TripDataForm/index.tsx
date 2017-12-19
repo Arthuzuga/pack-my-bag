@@ -2,7 +2,7 @@ import * as React from "react";
 import { withFormik, FormikProps, Field } from "formik";
 import Geosuggest, { Suggest, Styles, GeosuggestProps } from "react-geosuggest";
 import { ITripData } from "../../stores/LuggageStore";
-import { WeatherStore, Clima, Names, Weathers , ClimaType} from "../../stores/WeatherStore";
+import { WeatherStore, Clima, Names, Weathers , ClimaType, IWeatherResponse} from "../../stores/WeatherStore";
 import { CurrentStore } from "../../stores/CurrentStore";
 
 const s = require("./style.scss");
@@ -12,6 +12,7 @@ interface Props {
     onSubmit: (fields: Fields) => void;
     weatherSearcher: (fields: Fields)=> void;
     currentSearcher: (fields: Fields)=> void;
+    weatherResponse: IWeatherResponse | null;
 }
 
 type Fields = ITripData;
@@ -71,15 +72,6 @@ export const InnerForm = ({
         />{" "}
         Outro
         <p className={s.p}>Para onde vamos?</p>
-        {/* <input
-            type="text"
-            name="cidade"
-            value={values.cidade}
-            onChange={handleChange}
-            placeholder="Para Onde Vamos"
-            className={s.input}
-        /> */}
-
         <Geosuggest 
             className={s.geosuggestSytle}
             
@@ -284,10 +276,5 @@ const MyForm = withFormik<Props, Fields>({
     mapPropsToValues: props => props.fields!,
     enableReinitialize: true,
 })(InnerForm);
-
-// Use <MyForm /> anywhere
-// const Basic = (props: Props) => {
-//     return <MyForm fields={props.fields} onSubmit={props.onSubmit} />;
-// };
 
 export default MyForm;

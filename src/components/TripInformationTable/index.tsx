@@ -2,6 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ITripData, Stuff, Amounts, clothNames, clothWeights } from "../../stores/LuggageStore";
 import {  ICurrentResponse } from "../../stores/CurrentStore";
+import { IWeatherResponse } from "../../stores/WeatherStore";
 
 
 type Fields = ITripData;
@@ -11,12 +12,13 @@ const s = require("./style.scss");
 interface Props {
     tripData: ITripData;
     clothesDemand: Amounts;
+    weatherResponse: IWeatherResponse | null;
     currentData:  ITripData | null;
     currentSearcher: (fields: Fields) => void;
     currentResponse: ICurrentResponse | null;
 }
 
-const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand, currentData, currentSearcher, currentResponse }) => {
+const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand, currentData, currentSearcher, currentResponse, weatherResponse }) => {
     return (
         <table>
             <caption>Informações para sua viagem </caption>

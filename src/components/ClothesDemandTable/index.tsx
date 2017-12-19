@@ -11,10 +11,10 @@ const s = require("./style.scss");
 interface Props {
     tripData: ITripData;
     clothesDemand: Amounts;
-    // weatherData: IWeatherResponse;
+    weatherResponse: IWeatherResponse | null;
 }
 
-const Table: React.StatelessComponent<Props> = ({ tripData, clothesDemand  }) => {
+const Table: React.StatelessComponent<Props> = ({ tripData, clothesDemand, weatherResponse  }) => {
     return (
         <table>
             <caption>Tabela do {tripData.nomePessoa}</caption>
