@@ -62,6 +62,7 @@ export default class Main extends React.Component<Props, State> {
                         onSubmit={this.onSubmit}
                         weatherSearcher ={this.searchWeather}
                         currentSearcher={this.searchCurrent}
+                        weatherResponse = {this.props.weatherStore.weatherResponse}
                     />
 
                     {
@@ -69,7 +70,7 @@ export default class Main extends React.Component<Props, State> {
                             <Table
                                 tripData={this.props.luggageStore.tripData!}
                                 clothesDemand={this.props.luggageStore.clothesDemand}
-                                // weatherData={this.weatherResponse}
+                                weatherResponse = {this.props.weatherStore.weatherResponse}
                             />
                         ) : null
                     }     
@@ -82,6 +83,7 @@ export default class Main extends React.Component<Props, State> {
                                 currentData={this.props.currentStore.currentData}
                                 currentSearcher = {this.searchCurrent}
                                 currentResponse = {this.props.currentStore.icurrentResponse}
+                                weatherResponse = {this.props.weatherStore.weatherResponse}
                             />
                         ) : null
                     }   
