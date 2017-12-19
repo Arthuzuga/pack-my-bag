@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ITripData, Stuff, Amounts, clothNames, clothWeights } from "../../stores/LuggageStore";
+import { IWeatherResponse } from "../../stores/WeatherStore";
+
 
 type Fields = ITripData;
 
@@ -9,9 +11,10 @@ const s = require("./style.scss");
 interface Props {
     tripData: ITripData;
     clothesDemand: Amounts;
+    // weatherData: IWeatherResponse;
 }
 
-const Table: React.StatelessComponent<Props> = ({ tripData, clothesDemand }) => {
+const Table: React.StatelessComponent<Props> = ({ tripData, clothesDemand  }) => {
     return (
         <table>
             <caption>Tabela do {tripData.nomePessoa}</caption>
