@@ -12,6 +12,8 @@ import Basic from "../../components/TripDataForm";
 import Table from "../../components/ClothesDemandTable";
 import InfoTable from "../../components/TripInformationTable";
 import { ITripData, LuggageStore } from "../../stores/LuggageStore";
+import { WeatherStore, ClimaType, Clima, IWeatherData, IWeatherResponse } from "../../stores/WeatherStore";
+import { CurrentStore, ICurrentData } from "../../stores/CurrentStore";
 
 /** 
  * Style
@@ -21,11 +23,13 @@ const s = require("./style.scss");
 
 interface Props {
     luggageStore: LuggageStore;
+    weatherStore: WeatherStore;
+    currentStore: CurrentStore;
 }
 
 interface State {}
-
-@inject("luggageStore") // este nome tem que ser igual ao nome passado para o Provider no rootStories
+                    // Adicionei aqui no inject o novo Store (verificar se isso pode-se fazer)
+@inject("luggageStore","weatherStore","currentStore") // este nome tem que ser igual ao nome passado para o Provider no rootStories
 @observer
 export default class Main extends React.Component<Props, State> {
     state: State = {};
@@ -34,9 +38,16 @@ export default class Main extends React.Component<Props, State> {
         this.props.luggageStore.tripData = fields;
     }
 
-    // handleGeosuggestChange = (fields: ITripData) => {
-    //     this.setState({ 'address.fullAddress': fields.cidade});
-    //   }
+    searchWeather = (fields: IWeatherData ) =>{
+        this.props.weatherStore.weatherData = fields;
+        this.props.weatherStore.searchWeather();
+    }
+
+    searchCurrent = (fields: ITripData) =>{
+        this.props.currentStore.currentData = fields;
+        this.props.currentStore.searchCurrent();
+    }
+
     
     
     render() {
@@ -49,7 +60,8 @@ export default class Main extends React.Component<Props, State> {
                     <Basic
                         fields={this.props.luggageStore.tripData || undefined}
                         onSubmit={this.onSubmit}
-                        // handleGeosuggestChange={this.handleGeosuggestChange}
+                        weatherSearcher ={this.searchWeather}
+                        currentSearcher={this.searchCurrent}
                     />
 
                     {
@@ -57,6 +69,7 @@ export default class Main extends React.Component<Props, State> {
                             <Table
                                 tripData={this.props.luggageStore.tripData!}
                                 clothesDemand={this.props.luggageStore.clothesDemand}
+                                // weatherData={this.weatherResponse}
                             />
                         ) : null
                     }     
@@ -66,6 +79,9 @@ export default class Main extends React.Component<Props, State> {
                             <InfoTable
                                 tripData={this.props.luggageStore.tripData!}
                                 clothesDemand={this.props.luggageStore.clothesDemand}
+                                currentData={this.props.currentStore.currentData}
+                                currentSearcher = {this.searchCurrent}
+                                currentResponse = {this.props.currentStore.icurrentResponse}
                             />
                         ) : null
                     }   
