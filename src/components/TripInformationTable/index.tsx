@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { ITripData, Stuff, Amounts, clothNames, clothWeights } from "../../stores/LuggageStore";
-
+import {  ICurrentResponse } from "../../stores/CurrentStore";
 
 
 type Fields = ITripData;
@@ -11,9 +11,12 @@ const s = require("./style.scss");
 interface Props {
     tripData: ITripData;
     clothesDemand: Amounts;
+    currentData:  ITripData | null;
+    currentSearcher: (fields: Fields) => void;
+    currentResponse: ICurrentResponse | null;
 }
 
-const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand }) => {
+const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand, currentData, currentSearcher, currentResponse }) => {
     return (
         <table>
             <caption>Informações para sua viagem </caption>
@@ -46,7 +49,15 @@ const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand })
                             <img src={require('../../images/maleta.png')}/>
                             </td>
                             <td>Sua mala deverá ser despachada</td>
-                            <td>Custo adicional de: </td>
+                            {
+                                ((currentData  === null) || (currentResponse === null))? (
+                                    <td>Possivel Erro</td>
+                                ):(
+                                    <td>
+                                        O Valor que você irá pagar será {(50/(currentResponse.rates.BRL || 1)).toFixed(2)} {currentData.base}
+                                    </td>
+                                )
+                            }
                         </tr>
                     )
                 }
