@@ -67,37 +67,6 @@ export const clothNames: Names = {
 
 const FieldsLocalStorageID = "fields";
 
-// Criar uma Store!!!!!!!
-// const base = "BRL";
-
-// async function getCurrency() {
-//     try {
-//         const data = await fetch(`http://api.fixer.io/latest?base=${base}`).then(res => res.json());
-//         console.log(data);
-//     } catch (err) {
-//     }
-// }
-
-// getCurrency()
-
-// const city = "Sao+Paulo";
-// const lat = "-23.5505199";
-// const lng = "-46.63330939999997";
-// const countryCode= "BR";
-
-// async function getWeather(location: ITripData) { //adicionei o parametro de location para ter acesso aos estados
-//                                                 //de latitude e longitude dos estados que serão passados pela chamada da função
-//     try {
-//         const data1 = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location.location.lat}&lon=${location.location.lng}&units=metric&appid=2d500cb874e4b6c07216d58d9201c979&cnt=16`)
-//             .then(res => res.json());
-//         console.log(data1);
-//     } catch(err) {
-//         console.log(err);
-//     }   
-// }
-// getWeather()
-// Pesquisar sobre como usar um store (MobX) com api call 
-
 export class LuggageStore {
     @observable
     public tripData: ITripData | null;
