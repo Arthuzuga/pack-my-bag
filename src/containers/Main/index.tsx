@@ -13,7 +13,7 @@ import Table from "../../components/ClothesDemandTable";
 import InfoTable from "../../components/TripInformationTable";
 import { ITripData, LuggageStore } from "../../stores/LuggageStore";
 import { WeatherStore, ClimaType, Clima, IWeatherData, IWeatherResponse } from "../../stores/WeatherStore";
-import { CurrentStore, ICurrentData } from "../../stores/CurrentStore";
+import { CurrencyStore, ICurrentData } from "../../stores/CurrentStore";
 
 /** 
  * Style
@@ -24,7 +24,7 @@ const s = require("./style.scss");
 interface Props {
     luggageStore: LuggageStore;
     weatherStore: WeatherStore;
-    currentStore: CurrentStore;
+    currentStore: CurrencyStore;
 }
 
 interface State {}
@@ -47,8 +47,6 @@ export default class Main extends React.Component<Props, State> {
         this.props.currentStore.currentData = fields;
         this.props.currentStore.searchCurrent();
     }
-
-    
     
     render() {
         return (
@@ -62,7 +60,8 @@ export default class Main extends React.Component<Props, State> {
                         onSubmit={this.onSubmit}
                         weatherSearcher ={this.searchWeather}
                         currentSearcher={this.searchCurrent}
-                        weatherResponse = {this.props.weatherStore.weatherResponse}
+                        iweatherResponse = {this.props.weatherStore.iweatherResponse}
+                        isRaining = {this.props.weatherStore.isRaining}
                     />
 
                     {
@@ -70,7 +69,8 @@ export default class Main extends React.Component<Props, State> {
                             <Table
                                 tripData={this.props.luggageStore.tripData!}
                                 clothesDemand={this.props.luggageStore.clothesDemand}
-                                weatherResponse = {this.props.weatherStore.weatherResponse}
+                                weatherResponse = {this.props.weatherStore.iweatherResponse}
+                            
                             />
                         ) : null
                     }     
@@ -83,7 +83,7 @@ export default class Main extends React.Component<Props, State> {
                                 currentData={this.props.currentStore.currentData}
                                 currentSearcher = {this.searchCurrent}
                                 currentResponse = {this.props.currentStore.icurrentResponse}
-                                weatherResponse = {this.props.weatherStore.weatherResponse}
+                                iweatherResponse = {this.props.weatherStore.iweatherResponse}
                             />
                         ) : null
                     }   

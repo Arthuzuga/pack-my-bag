@@ -7,7 +7,7 @@ import { Provider } from "mobx-react";
 import { RouterStore, syncHistoryWithStore } from "mobx-react-router";
 import createBrowserHistory from 'history/createBrowserHistory';
 
-import { LuggageStore, CurrentStore, WeatherStore } from "./stores";
+import { rootStore } from "./stores";
 
 
 import App from "./containers/App";
@@ -17,22 +17,11 @@ interface Props{
     tripData: ITripData;
 }
 
-const routingStore = new RouterStore();
-const luggageStore = new LuggageStore();
-const weatherStore = new WeatherStore();
-const currentStore = new CurrentStore();
-const rootStores = {
-    luggageStore: luggageStore, // este nome tem que ser igual ao nome passado para o inject
-    weatherStore: weatherStore,
-    currentStore: currentStore,
-    routing: routingStore
-};
-
 const browserHistory = createBrowserHistory();
-const history = syncHistoryWithStore(browserHistory, routingStore);
+const history = syncHistoryWithStore(browserHistory, rootStore.routerStore);
 
 ReactDOM.render(
-    <Provider {...rootStores} >
+    <Provider {...rootStore} >
         <Router history={history} >
             <App />
         </Router>

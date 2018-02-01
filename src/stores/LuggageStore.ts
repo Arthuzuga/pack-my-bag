@@ -1,4 +1,6 @@
 import { autorun, observable, computed } from "mobx";
+import { WeatherStore, IWeatherResponse } from "../stores/WeatherStore";
+import { rootStore } from './index';
 
 export interface ITripData {
     nomePessoa: string;
@@ -33,7 +35,8 @@ export type Stuff =
     | "socialpants"
     | "dress"
     | "sunga"
-    | "biquini";
+    | "biquini"
+    | "jacket";
 export type Amounts = { [key in Stuff]: null | number }; //irá criar um objeto com os mesmos contrutores do Stuff, mas con sua tipagem de null ou number
 export type Weights = { [key in Stuff]: number };
 export type Names = { [key in Stuff]: string };
@@ -49,7 +52,8 @@ export const clothWeights: Weights = {
     socialpants: 600,
     dress: 400,
     sunga: 50,
-    biquini: 100
+    biquini: 100,
+    jacket: 250 
 };
 
 export const clothNames: Names = {
@@ -62,7 +66,8 @@ export const clothNames: Names = {
     socialpants: "Calças Social",
     dress: "Vestidos",
     sunga: "Sunga",
-    biquini: "Biquini"
+    biquini: "Biquini",
+    jacket: "Casaco"
 };
 
 const FieldsLocalStorageID = "fields";
@@ -130,7 +135,11 @@ export class LuggageStore {
                 fields.praias === "sim" &&
                 fields.cidadePraia == "sim"
                     ? 1
-                    : null
+                    : null,
+            jacket: 
+                rootStore.weatherStore.isRaining 
+                ? 1 
+                : null,
         };
     }
 }

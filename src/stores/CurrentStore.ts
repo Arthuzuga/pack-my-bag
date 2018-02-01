@@ -84,7 +84,7 @@ export type Current = "BRL";
 
 export type CurrentType = { [key in Current]: null  };
 
-export class CurrentStore{
+export class CurrencyStore{
     @observable
     public currentData: ITripData | null;
     
@@ -129,12 +129,12 @@ export class CurrentStore{
                     .then(res => res.json());
             // console.log(data1);
             this.icurrentResponse = data;
-            console.log(this.icurrentResponse);
+            // console.log(this.icurrentResponse);
             return data;
         } catch (err) {
             console.error(err);
         } finally {
-            console.info("finally");
+            // console.info("finally");
         }
     }
 }

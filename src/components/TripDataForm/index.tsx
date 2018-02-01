@@ -1,31 +1,43 @@
 import * as React from "react";
+import { toJS } from "mobx";
 import { withFormik, FormikProps, Field } from "formik";
 import Geosuggest, { Suggest, Styles, GeosuggestProps } from "react-geosuggest";
 import { ITripData } from "../../stores/LuggageStore";
-import { WeatherStore, Clima, Names, Weathers , ClimaType, IWeatherResponse} from "../../stores/WeatherStore";
-import { CurrentStore } from "../../stores/CurrentStore";
+import {
+    WeatherStore,
+    Clima,
+    Names,
+    IWeatherResponse
+} from "../../stores/WeatherStore";
+import { CurrencyStore } from "../../stores/CurrentStore";
+import { propTypes } from "mobx-react";
 
 const s = require("./style.scss");
 
 interface Props {
     fields?: Fields;
     onSubmit: (fields: Fields) => void;
-    weatherSearcher: (fields: Fields)=> void;
-    currentSearcher: (fields: Fields)=> void;
-    weatherResponse: IWeatherResponse | null;
+    weatherSearcher: (fields: Fields) => void;
+    currentSearcher: (fields: Fields) => void;
+    iweatherResponse: IWeatherResponse | null; //Declaração para o Container que nesse componente será necessário utilizar essa propriedade/estado
+    isRaining: boolean | null;
 }
 
 type Fields = ITripData;
 
 export const InnerForm = ({
+    // propriedades injetadas pelo formik
     values,
     errors,
     touched,
     handleChange,
     handleSubmit,
     isSubmitting,
+    // propriedades diretamente passadas pelo parent
     weatherSearcher,
-}: FormikProps<Fields> & Pick<Props, "weatherSearcher">) => (
+    iweatherResponse,
+    isRaining
+}: FormikProps<Fields> & Props) => (
     <form onSubmit={handleSubmit} className={s.form}>
         <label>
             <p className={s.p}>Qual o seu nome?</p>
@@ -61,7 +73,7 @@ export const InnerForm = ({
             className={s.input}
         />{" "}
         Feminino
-        <input
+        {/* <input
             type="radio"
             name="sexoMFO"
             required
@@ -70,32 +82,39 @@ export const InnerForm = ({
             checked={values.sexoMFO === "o"}
             className={s.input}
         />{" "}
-        Outro
+        Outro */}
         <p className={s.p}>Para onde vamos?</p>
-        <Geosuggest 
+        <Geosuggest
             className={s.geosuggestSytle}
-            
             onChange={(...args: any[]) => {
-                console.log({args});
+                console.log({ args });
             }}
-            onSuggestSelect={(value) => {
+            onSuggestSelect={value => {
                 values.location = value.location;
                 values.cidade = value.label.toString();
-                console.log(value);
+                // console.log(value);
                 weatherSearcher(values);
             }}
         />
-
         <p className={s.p}>Qual a moeda que você usa?</p>
         <select value={values.base} name="base" onChange={handleChange}>
             <option>Selecione uma moeda</option>
-            <option value="BRL" selected={values.base === "BRL"}>Reais</option>
-            <option value="USD" selected={values.base === "USD"}>Dólar Americano</option>
-            <option value="EUR" selected={values.base === "EUR"}>Euro</option>
-            <option value="GBP" selected={values.base === "GBP"}>Libras Esterlinas</option>
-            <option value="JPY" selected={values.base === "JPY"}>YEN</option>
-        </select>    
-
+            <option value="BRL" selected={values.base === "BRL"}>
+                Reais
+            </option>
+            <option value="USD" selected={values.base === "USD"}>
+                Dólar Americano
+            </option>
+            <option value="EUR" selected={values.base === "EUR"}>
+                Euro
+            </option>
+            <option value="GBP" selected={values.base === "GBP"}>
+                Libras Esterlinas
+            </option>
+            <option value="JPY" selected={values.base === "JPY"}>
+                YEN
+            </option>
+        </select>
         <p className={s.p}>Quantos dia pretende passar lá?</p>
         <input
             name="numeroDias"
@@ -192,57 +211,63 @@ export const InnerForm = ({
         ) : (
             <span />
         )}
-        <p className={s.p} >Em {values.cidade} tem praia?</p>
-        <input
-            name="cidadePraia"
-            value="sim"
-            onChange={handleChange}
-            checked={values.cidadePraia === "sim"}
-            type="radio"
-            className={s.input}
-        />{" "}
-        Sim
-        <input
-            name="cidadePraia"
-            value="nao"
-            onChange={handleChange}
-            checked={values.cidadePraia === "nao"}
-            type="radio"
-            className={s.input}
-        />{" "}
-        Não
-        {values.cidadePraia === "sim"? (
+        {isRaining === false ? (
             <div>
-                <p className={s.p}>Vamos a La Playa?</p>
+                <p className={s.p}>Em {values.cidade} tem praia?</p>
                 <input
-                    name="praias"
+                    name="cidadePraia"
                     value="sim"
                     onChange={handleChange}
-                    checked={values.praias === "sim"}
+                    checked={values.cidadePraia === "sim"}
                     type="radio"
                     className={s.input}
                 />{" "}
                 Sim
                 <input
-                    name="praias"
+                    name="cidadePraia"
                     value="nao"
                     onChange={handleChange}
-                    checked={values.praias === "nao"}
+                    checked={values.cidadePraia === "nao"}
                     type="radio"
                     className={s.input}
                 />{" "}
                 Não
-                {values.praias === "sim" ? (
+                {values.cidadePraia === "sim" ? (
                     <div>
-                        <p className={s.p}>Quantos dias vai a praia?</p>
+                        <p className={s.p}>Vamos a La Playa?</p>
                         <input
-                            name="numeroPraia"
-                            type="number"
+                            name="praias"
+                            value="sim"
                             onChange={handleChange}
-                            value={values.numeroPraia}
+                            checked={values.praias === "sim"}
+                            type="radio"
                             className={s.input}
-                            min="0"
-                        />
+                        />{" "}
+                        Sim
+                        <input
+                            name="praias"
+                            value="nao"
+                            onChange={handleChange}
+                            checked={values.praias === "nao"}
+                            type="radio"
+                            className={s.input}
+                        />{" "}
+                        Não
+                        {values.praias === "sim" ? (
+                            <div>
+                                <p className={s.p}>Quantos dias vai a praia?</p>
+                                <input
+                                    name="numeroPraia"
+                                    type="number"
+                                    onChange={handleChange}
+                                    value={values.numeroPraia}
+                                    className={s.input}
+                                    min="0"
+                                />
+                            </div>
+                        ) : (
+                            <span />
+                        )}
                     </div>
                 ) : (
                     <span />
@@ -272,9 +297,10 @@ const MyForm = withFormik<Props, Fields>({
         props.onSubmit(values);
         props.weatherSearcher(values);
         props.currentSearcher(values);
+        // props.iweatherResponse;
     },
     mapPropsToValues: props => props.fields!,
-    enableReinitialize: true,
+    enableReinitialize: true
 })(InnerForm);
 
 export default MyForm;

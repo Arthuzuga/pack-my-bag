@@ -12,13 +12,13 @@ const s = require("./style.scss");
 interface Props {
     tripData: ITripData;
     clothesDemand: Amounts;
-    weatherResponse: IWeatherResponse | null;
+    iweatherResponse: IWeatherResponse | null;
     currentData:  ITripData | null;
     currentSearcher: (fields: Fields) => void;
     currentResponse: ICurrentResponse | null;
 }
 
-const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand, currentData, currentSearcher, currentResponse, weatherResponse }) => {
+const InfoTable: React.StatelessComponent<Props> = ({ tripData, clothesDemand, currentData, currentSearcher, currentResponse, iweatherResponse }) => {
     return (
         <table>
             <caption>Informações para sua viagem </caption>
