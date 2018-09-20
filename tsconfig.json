@@ -1,15 +1,28 @@
 {
     "compilerOptions": {
         "outDir": "./dist/",
-        "sourceMap": true,
         "noImplicitAny": true,
+        "target": "es5",
         "module": "commonjs",
-        "target": "es6",
         "jsx": "react",
+        "allowJs": true,
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "moduleResolution": "node",
+        "noImplicitThis": true,
         "strict": true,
-        "experimentalDecorators": true
+        "importHelpers": true,
+        "lib": [
+            "dom",
+            "esnext"
+        ]
     },
     "include": [
         "./src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }

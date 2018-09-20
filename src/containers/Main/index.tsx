@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Route } from "react-router";
 import { observer, inject } from "mobx-react";
 
 /**
@@ -10,14 +9,8 @@ import Basic from "../../components/TripDataForm";
 import Table from "../../components/ClothesDemandTable";
 import InfoTable from "../../components/TripInformationTable";
 import { ITripData, LuggageStore } from "../../stores/LuggageStore";
-import {
-	WeatherStore,
-	ClimaType,
-	Clima,
-	IWeatherData,
-	IWeatherResponse,
-} from "../../stores/WeatherStore";
-import { CurrencyStore, ICurrentData } from "../../stores/CurrentStore";
+import { WeatherStore, IWeatherData } from "../../stores/WeatherStore";
+import { CurrencyStore } from "../../stores/CurrentStore";
 
 /**
  * Style

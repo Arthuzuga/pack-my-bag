@@ -1,16 +1,11 @@
 import * as React from "react";
-import { toJS } from "mobx";
-import { withFormik, FormikProps, Field } from "formik";
-import Geosuggest, { Suggest, Styles, GeosuggestProps } from "react-geosuggest";
+// import { toJS } from "mobx";
+import { withFormik, FormikProps,  } from "formik";
+import Geosuggest from "react-geosuggest";
 import { ITripData } from "../../stores/LuggageStore";
 import {
-    WeatherStore,
-    Clima,
-    Names,
     IWeatherResponse
 } from "../../stores/WeatherStore";
-import { CurrencyStore } from "../../stores/CurrentStore";
-import { propTypes } from "mobx-react";
 
 const s = require("./style.scss");
 
@@ -28,14 +23,14 @@ type Fields = ITripData;
 export const InnerForm = ({
     // propriedades injetadas pelo formik
     values,
-    errors,
-    touched,
+    // errors,
+    // touched,
     handleChange,
     handleSubmit,
-    isSubmitting,
+    // isSubmitting,
     // propriedades diretamente passadas pelo parent
     weatherSearcher,
-    iweatherResponse,
+    // iweatherResponse,
     isRaining
 }: FormikProps<Fields> & Props) => (
     <form onSubmit={handleSubmit} className={s.form}>
@@ -290,8 +285,8 @@ const MyForm = withFormik<Props, Fields>({
         values,
         {
             props,
-            setSubmitting,
-            setErrors /* setValues, setStatus, and other goodies */
+            // setSubmitting,
+            // setErrors /* setValues, setStatus, and other goodies */
         }
     ) => {
         props.onSubmit(values);
