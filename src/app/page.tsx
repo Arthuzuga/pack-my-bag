@@ -1,102 +1,138 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Image from "next/image";
+import styles from "./page.module.css";
+import { MdOutlineLuggage } from "react-icons/md";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by edeeiting&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <div className={styles.cover}>
+        <Image
+          src="https://images.unsplash.com/photo-1522199710521-72d69614c702?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3231&q=80"
+          alt="luggage"
+          width={1157}
+          height={769}
+          className={styles.image}
+        />
+        <span>by @anete_lusina on Unplash</span>
+      </div>
+      <div className={styles.title}>
+        <h1>Bem-vinde ao Arrume Minha Mala</h1>
+        <h2>Seu assistente virtual para ajudar a organizar sua viagem</h2>
+      </div>
+      <div className={styles.tableSection}>
+        <h3 className={styles.supportText}>
+          <span>
+            Responda nossos formulários para que possamos indicar a melhor
+            bagagem para sua viagem!
+          </span>
+          <span>
+            Diremos quais itens sugerimos levar e qual o peso total de sua
+            bagagem.
+          </span>
+        </h3>
+        <div className={styles.tableContent}>
+          <h3 className={styles.tableHeader}>Resumo da mala</h3>
+          <div className={styles.tableData}>
+            <h4>Básicos</h4>
+            <ul className={styles.list}>
+              <li className={styles.option}>
+                <span>1x Passaporte</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Carteira</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Celular</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Fones de ouvido</span>
+                <span>300g</span>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.tableData}>
+            <h4>Higiene</h4>
+            <ul className={styles.list}>
+              <li className={styles.option}>
+                <span>1x Escova de dentes</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Desodorante</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Shampoo</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Maquiagem</span>
+                <span>300g</span>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.tableData}>
+            <h4>Roupas</h4>
+            <ul className={styles.list}>
+              <li className={styles.option}>
+                <span>1x Camisa</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Calça</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Vestido</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Pijama</span>
+                <span>300g</span>
+              </li>
+            </ul>
+          </div>
+          <div className={styles.tableData}>
+            <h4>Calçados & Acessórios</h4>
+            <ul className={styles.list}>
+              <li className={styles.option}>
+                <span>1x Par de tênis</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Par de meias</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Relógio</span>
+                <span>300g</span>
+              </li>
+              <li className={styles.option}>
+                <span>1x Boné</span>
+                <span>300g</span>
+              </li>
+            </ul>
+          </div>
+          <h3>Total: 5kg</h3>
+          <span>Tipo de bagagem: Cabine</span>
         </div>
       </div>
-
-      <div className={styles.center}>
+      <div className={styles.cover}>
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src="https://images.unsplash.com/photo-1530789253388-582c481c54b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=6000&q=80"
+          alt="travel"
+          width={1157}
+          height={769}
+          className={styles.image}
         />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
+        <span>by @directormesut on Unplash</span>
+        <a className={styles.callToAction} href=".">
+          Vamos começar! <MdOutlineLuggage size={28} />
         </a>
       </div>
     </main>
-  )
+  );
 }
