@@ -55,7 +55,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  column-gap: 18rem;
+  column-gap: 10rem;
 }
 
 .supportText {
@@ -88,6 +88,12 @@
   height: 65vh;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
+  will-change: width;
+  transition: width 800ms ease-out;
+}
+
+.tableContent:hover {
+  width: 40rem;
 }
 
 .tableData,
@@ -163,6 +169,9 @@
     width: 21rem;
     height: 55vh;
     column-gap: 0;
+  }
+  .tableContent:hover {
+    width: 21rem;
   }
 
   .title {
