@@ -1,0 +1,42 @@
+.container {
+  width: 100%;
+  padding: 2rem 2rem 4rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid gray;
+  color: var(---primary-black-color);
+  font: 12px;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 1rem;
+}
+
+.menuItem:hover {
+  color: #6752ea;
+}
+
+.icon {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+  }
+
+  .menu {
+    column-gap: 2rem;
+  }
+
+  .icon {
+    display: inline;
+  }
+  .link {
+    display: none;
+  }
+}
