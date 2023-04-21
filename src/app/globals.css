@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -38,6 +38,18 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+
+  ---primary-black-color: #040415;
+  ---primary-color: #6752ea;
+  ---primary-color-rgb: 103, 82, 234;
+  ---secondary-color-rgb: 255, 77, 28;
+  ---primary-white-color: #f4f3f8;
+  ---primary-gray-color: #6e6e6e;
+
+  ---mobile-xs-breakpoint: 410px;
+  ---mobile-m-breakpoint: 411px;
+  ---mobile-l-breakpoint: 819px;
+  ---tablet-breakpoint: 820px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -85,8 +97,9 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
+body,
+footer {
+  color: var(---primary-gray-color);
   background: linear-gradient(
       to bottom,
       transparent,
