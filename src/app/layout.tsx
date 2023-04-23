@@ -10,6 +10,13 @@ const notoSans = Noto_Sans({
 export const metadata = {
   title: "Arrume minha mala",
   description: "O amigo que te ajuda a organizar o que precisa para viajar",
+  viewport: {
+    width: "device-width",
+    minimumScale: 1,
+    maximumScale: 1,
+    initialScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
