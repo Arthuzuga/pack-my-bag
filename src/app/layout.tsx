@@ -1,6 +1,6 @@
 import { Noto_Sans } from "next/font/google";
 import "./globals.css";
-import Footer from "./components/Footer";
+import { Footer } from "./components";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -8,8 +8,8 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata = {
-  title: "Pack My Bag",
-  description: "Your friend to help organize what you need to get for travels",
+  title: "Arrume minha mala",
+  description: "O amigo que te ajuda a organizar o que precisa para viajar",
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={notoSans.className}>
         {children}
         <Footer />

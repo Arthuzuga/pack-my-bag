@@ -18,8 +18,8 @@ const Footer = () => {
       </div>
       <div className={styles.menu}>
         <div className={styles.menuItem}>
-          <Link href="/blog">
-            <span className={styles.link}>Blog</span>
+          <Link href="/">
+            <span className={styles.link}>Home</span>
             <RiBallPenLine className={styles.icon} />
           </Link>
         </div>

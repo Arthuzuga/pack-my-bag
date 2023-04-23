@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { MdOutlineLuggage } from "react-icons/md";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -129,9 +130,9 @@ export default function Home() {
           className={styles.image}
         />
         <span>by @directormesut on Unplash</span>
-        <a className={styles.callToAction} href=".">
+        <Link className={styles.callToAction} href="/form">
           Vamos começar! <MdOutlineLuggage size={28} />
-        </a>
+        </Link>
       </div>
     </main>
   );
