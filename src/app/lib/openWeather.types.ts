@@ -6,6 +6,13 @@ export interface IGeolocation {
   country: string;
 }
 
+export interface IWeather {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
 interface IDailyWeather {
   dt: number;
   sunrise: number;
@@ -26,14 +33,7 @@ interface IDailyWeather {
   };
   pressure: number;
   humidity: number;
-  weather: [
-    {
-      id: number;
-      main: string;
-      description: string;
-      icon: string;
-    }
-  ];
+  weather: Array<IWeather>;
   speed: number;
   deg: number;
   gust: number;
@@ -42,7 +42,7 @@ interface IDailyWeather {
   rain: number;
 }
 
-export interface IWeather {
+export interface IPlaceWeather {
   city: {
     id: number;
     name: string;

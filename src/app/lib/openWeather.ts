@@ -1,4 +1,8 @@
-import type { IGeolocation, IWeather } from "./openWeather.types";
+import type {
+  IGeolocation,
+  IPlaceWeather,
+  IWeather,
+} from "./openWeather.types";
 
 export const getPlaceCoordinates: (
   place: string
@@ -6,22 +10,26 @@ export const getPlaceCoordinates: (
   const res = await fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${place}&limit=1&appid=${process.env.weatherAPI}`
   );
-  return res.json();
+  const data: Array<IGeolocation> = await res.json();
+  return data[0];
 };
 
 export const getPlaceWeather: (
   lat: number,
   lon: number
-) => Promise<IWeather> = async (lat: number, lon: number) => {
+) => Promise<Array<IWeather>> = async (lat: number, lon: number) => {
   const res = await fetch(
-    `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=16&appid=${process.env.weatherAPI}`
+    `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${process.env.weatherAPI}`
   );
-  return res.json();
+  const data: IPlaceWeather = await res.json();
+  return data.list.flatMap(({ weather }) => weather);
 };
 
-export const getWeatherData = async (place: string) => {
+export const getWeatherData: (
+  place: string
+) => Promise<Array<IWeather>> = async (place: string) => {
   const coordinates = await getPlaceCoordinates(place);
   const placeWeather = await getPlaceWeather(coordinates.lat, coordinates.lon);
 
-  return placeWeather.list;
+  return placeWeather;
 };
