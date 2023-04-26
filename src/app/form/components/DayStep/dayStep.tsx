@@ -22,7 +22,7 @@ const DayStep = ({ onSave }: { onSave: (value: number) => void }) => {
         placeholder="1"
       />
       <button className={styles.saveButton} onClick={handleSave}>
-        Salvar
+        Próximo
       </button>
     </div>
   );

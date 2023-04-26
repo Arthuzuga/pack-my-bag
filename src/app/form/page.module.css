@@ -5,6 +5,44 @@
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  position: relative;
   padding: 2rem;
+}
+
+.content {
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 4rem;
+  padding: 2rem;
+  border: 1px solid var(---primary-gray-color);
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  min-height: 30vh;
+  text-align: center;
+}
+
+.path {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.link {
+  border: 2px solid var(---primary-gray-color);
+  padding: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  width: 45%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.link:hover {
+  border-color: var(---primary-color);
+  color: var(---primary-color);
 }

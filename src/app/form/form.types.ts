@@ -25,3 +25,10 @@ export interface IFormContainer {
   onSave: () => void;
   label: string;
 }
+
+export type gender = "homem" | "mulher" | "não binário";
+
+export interface IGenderStep {
+  onSave: (option: gender) => void;
+  loading: boolean;
+}

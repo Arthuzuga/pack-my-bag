@@ -10,6 +10,8 @@ const FormContainer = ({
   onChange,
   label,
 }: IFormContainer) => {
+  const text =
+    label !== "higiene" && label !== "local" ? "Próximo" : "Gerar Tabela";
   return (
     <div className={styles.container}>
       <h1>Selecione as opções de {label}</h1>
@@ -23,7 +25,7 @@ const FormContainer = ({
         ))}
       </div>
       <button className={styles.saveButton} onClick={onSave}>
-        Salvar
+        {text}
       </button>
     </div>
   );

@@ -14,6 +14,7 @@ const nextConfig = {
   },
   env: {
     weatherAPI: process.env.WEATHER_API_TOKEN,
+    openAIKey: process.env.OPEN_AI_KEY,
   },
 };
 

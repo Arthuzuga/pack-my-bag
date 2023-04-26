@@ -1,0 +1,78 @@
+.container {
+  border: 2px solid var(---primary-gray-color);
+  width: 16rem;
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container:hover {
+  border-color: var(---primary-color);
+  color: var(---primary-color);
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 12px;
+  background-color: var(---primary-white-color);
+  border: 2px solid var(---primary-gray-color);
+}
+
+.container:hover input ~ .checkmark {
+  border-color: var(---primary-color);
+}
+
+.container input:checked ~ .checkmark {
+  background-color: var(---primary-color);
+  border: none;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 0.25rem;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border: solid var(---primary-white-color);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.info {
+  padding-left: 1.5rem;
+}
+
+.info::first-letter {
+  text-transform: capitalize;
+}
